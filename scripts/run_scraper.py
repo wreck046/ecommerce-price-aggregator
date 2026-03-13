@@ -1,14 +1,12 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath("."))
-
 from src.app.scraper.shopee_scraper import scrape_shopee
-from src.app.database.db import save_products
+from src.app.services.product_service import save_products
 
 keyword = input("Keyword: ")
+pages = int(input("Pages to scrape: "))
 
-df = scrape_shopee(keyword, pages=3)
+df = scrape_shopee(keyword, pages)
+
+print("Total rows:", len(df))
 
 save_products(df)
 

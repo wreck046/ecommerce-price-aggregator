@@ -33,3 +33,7 @@ uvicorn src.app.api.main:app --reload
 ## Run Dashboard
 
 streamlit run src/app/dashboard/app.py
+
+## Architecture
+
+Scraper → PostgreSQL → FastAPI → Streamlit

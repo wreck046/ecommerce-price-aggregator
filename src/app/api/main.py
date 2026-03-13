@@ -1,22 +1,17 @@
-from fastapi import FastAPI, Query
-from src.app.database.db import load_products
+from fastapi import FastAPI
+from src.app.services.product_service import get_products
 
 app = FastAPI()
 
 
 @app.get("/products")
-def get_products():
+def products():
 
-    df = load_products()
-
-    return df.to_dict(orient="records")
-
+    return get_products()
 
 @app.get("/search")
-def search_products(keyword: str = Query(...)):
+def search(keyword: str):
 
-    df = load_products()
+    products = get_products()
 
-    result = df[df["name"].str.contains(keyword, case=False, na=False)]
-
-    return result.to_dict(orient="records")
+    return [p for p in products if keyword.lower() in p["name"].lower()]
