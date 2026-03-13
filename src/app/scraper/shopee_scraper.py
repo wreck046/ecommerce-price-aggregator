@@ -11,7 +11,9 @@ def scrape_shopee(keyword, pages=1):
         browser = p.chromium.launch(headless=False)
 
         context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36",
+            locale="id-ID",
+            viewport={"width": 1280, "height": 800}
         )
 
         page = context.new_page()
@@ -20,11 +22,17 @@ def scrape_shopee(keyword, pages=1):
         page.goto("https://shopee.co.id")
         page.wait_for_timeout(5000)
 
+        print("Silakan login Shopee di browser...")
+        page.pause()
+
         # buka halaman search
         search_url = f"https://shopee.co.id/search?keyword={keyword}"
         page.goto(search_url)
 
         page.wait_for_timeout(6000)
+
+        print("Current URL:", page.url)
+        print("Page title:", page.title())
 
         # scroll untuk load produk
         for _ in range(pages):
@@ -33,7 +41,7 @@ def scrape_shopee(keyword, pages=1):
             page.wait_for_timeout(2000)
 
         # selector produk (lebih stabil)
-        items = page.query_selector_all("div.col-xs-2-4")
+        items = page.query_selector_all('[data-sqe="item"]')
 
         print("Items found:", len(items))
 

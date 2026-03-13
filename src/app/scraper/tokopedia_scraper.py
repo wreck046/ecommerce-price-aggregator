@@ -21,7 +21,7 @@ def scrape_tokopedia(keyword, pages=1):
             page.mouse.wheel(0, 8000)
             page.wait_for_timeout(2000)
 
-        items = page.query_selector_all("div.css-5wh65g")
+        items = page.query_selector_all('[data-testid="divSRPContentProducts"] div')
 
         for item in items:
 

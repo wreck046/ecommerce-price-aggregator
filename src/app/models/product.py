@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import declarative_base
+from src.app.database.base import Base
 
-Base = declarative_base()
 
 class Product(Base):
 

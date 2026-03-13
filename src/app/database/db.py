@@ -1,11 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
-from src.app.models.product import Base
+from src.app.database.base import Base
 from src.app.models.product import Product
 import os
 import pandas as pd
-
 
 load_dotenv()
 
@@ -15,7 +14,9 @@ engine = create_engine(DATABASE_URL)
 
 SessionLocal = sessionmaker(bind=engine)
 
+# create tables
 Base.metadata.create_all(bind=engine)
+
 
 def load_products():
 
@@ -42,6 +43,8 @@ def save_products(df):
 
     db = SessionLocal()
 
+    print("Saving rows:", len(df))
+
     for _, row in df.iterrows():
 
         product = Product(
@@ -49,8 +52,6 @@ def save_products(df):
             price=row["price"],
             platform=row["platform"]
         )
-
-        print("Saving rows:", len(df))
 
         db.add(product)
 
