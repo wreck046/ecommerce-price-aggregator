@@ -1,0 +1,9 @@
+requests
+pandas
+openpyxl
+fastapi
+uvicorn
+streamlit
+sqlalchemy
+psycopg2-binary
+python-dotenv
