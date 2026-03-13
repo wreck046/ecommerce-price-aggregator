@@ -1,10 +1,10 @@
-from src.app.scraper.shopee_scraper import scrape_shopee
+from src.app.scraper.aggregator import scrape_all
 from src.app.services.product_service import save_products
 
 keyword = input("Keyword: ")
 pages = int(input("Pages to scrape: "))
 
-df = scrape_shopee(keyword, pages)
+df = scrape_all(keyword, pages)
 
 print("Total rows:", len(df))
 

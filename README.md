@@ -4,10 +4,15 @@ Project untuk scraping harga marketplace dan menampilkan analisis harga.
 
 ## Features
 
-- Scrape Shopee products
-- Store data in PostgreSQL
+- Multi-Marketplace Scraper (Shopee + Tokopedia)
+- Data Storage with PostgreSQL
 - FastAPI REST API
-- Streamlit dashboard
+- Streamlit Analytics Dashboard
+- Docker Deployment
+
+## Architecture
+
+Scraper → PostgreSQL → FastAPI → Dashboard
 
 ## Tech Stack
 
@@ -33,7 +38,3 @@ uvicorn src.app.api.main:app --reload
 ## Run Dashboard
 
 streamlit run src/app/dashboard/app.py
-
-## Architecture
-
-Scraper → PostgreSQL → FastAPI → Streamlit

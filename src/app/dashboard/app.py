@@ -15,6 +15,16 @@ else:
 
     df["price"] = pd.to_numeric(df["price"], errors="coerce")
 
+    st.subheader("Price Comparison by Platform")
+
+    avg_price = df.groupby("platform")["price"].mean()
+
+    st.bar_chart(avg_price)
+
+    st.subheader("Price Distribution")
+
+    st.line_chart(df["price"])
+
     st.subheader("Average Price by Platform")
 
     avg_price = df.groupby("platform")["price"].mean()
