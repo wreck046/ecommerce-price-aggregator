@@ -1,18 +1,16 @@
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
+from src.app.models.product import Base
 import os
-import pandas as pd
+
 
 load_dotenv()
 
-DB_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(DB_URL)
+engine = create_engine(DATABASE_URL)
 
+SessionLocal = sessionmaker(bind=engine)
 
-def save_products(df):
-    df.to_sql("products", engine, if_exists="append", index=False)
-
-
-def load_products():
-    return pd.read_sql("SELECT * FROM products", engine)
+Base.metadata.create_all(bind=engine)
